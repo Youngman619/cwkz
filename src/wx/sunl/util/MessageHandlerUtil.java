@@ -14,8 +14,10 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import wx.sunl.model.Image;
 import wx.sunl.model.Music;
 import wx.sunl.model.Video;
+import wx.sunl.model.Voice;
 
 /**
  * 消息处理工具类
@@ -51,7 +53,7 @@ public class MessageHandlerUtil {
 		inputStream = null;
 		return map;
 	}
-	
+
 	/**
 	 * 根据消息类型构建返回消息
 	 * @param map
@@ -67,32 +69,33 @@ public class MessageHandlerUtil {
 		MessageType messageEnumType = MessageType.valueOf(MessageType.class, msgType.toUpperCase());
 		switch (messageEnumType) {
 		case TEXT:
+			String message = "感谢您关注“从吾客栈”酒店微信公众号，您的认可是对我们最大的鼓励！";
 			//处理文本消息
-			responseMessage = handleTextMessage(map);
+			responseMessage = buildTextMessage(map, message);
 			break;
 		case IMAGE:
 			//处理图片消息
-			/*responseMessage = handleImageMessage(map);---功能待开发*/
+			/*responseMessage = handleMessage(map);--功能待开发*/
 			break;
 		case VOICE:
 			//处理语音消息
-			/*responseMessage = handleVoiceMessage(map);---功能待开发*/
+			/*responseMessage = handleMessage(map);--功能待开发*/
 			break;
 		case VIDEO:
 			//处理视频消息
-			/*responseMessage = handleVideoMessage(map);---功能待开发*/
+			/*responseMessage = handleMessage(map);--功能待开发*/
 			break;
 		case SHORTVIDEO:
 			//处理小视频消息
-			/*responseMessage = handleSmallVideoMessage(map);---功能待开发*/
+			/*responseMessage = handleMessage(map);--功能待开发*/
 			break;
 		case LOCATION:
 			//处理位置消息
-			/*responseMessage = handleLocationMessage(map);---功能待开发*/
+			/*responseMessage = handleMessage(map);--功能待开发*/
 			break;
 		case LINK:
 			//处理链接消息
-			/*responseMessage = handleLinkMessage(map);---功能待开发*/
+			/*responseMessage = handleMessage(map);--功能待开发*/
 			break;
 		case EVENT:
 			//处理事件消息,用户在关注与取消关注公众号时，微信会向我们的公众号服务器发送事件消息,开发者接收到事件消息后就可以给用户下发欢迎消
@@ -103,6 +106,45 @@ public class MessageHandlerUtil {
 		}
 		//返回响应消息
 		return responseMessage;
+	}
+	
+	public static String handleEventMessage(Map<String, String> map){
+		//响应消息
+		String responseMessage = "";
+		//推送的欢迎语
+		String welcomeMessage = "";
+		//获取时间的类型
+		String event = map.get("Event");
+		switch (event) {
+		case "subscribe":
+			//关注事件
+			welcomeMessage = "欢迎您关注“从吾客栈”酒店微信公众号！";
+			responseMessage = buildWelcomeTextMessage(map, welcomeMessage);
+			break;
+		case "unsubscribe":
+			//取消关注事件
+			welcomeMessage = "感谢您关注“从吾客栈”酒店微信公众号，希望下一次的相遇，让您更加的满意！";
+			responseMessage = buildWelcomeTextMessage(map, welcomeMessage);
+			break;
+		default:
+			break;
+		}
+		return responseMessage;
+	}
+	
+	public static String buildWelcomeTextMessage(Map<String, String> map, String welcomeMessage){
+		//发送方帐号
+		String fromUserName = map.get("FromUserName");
+		// 开发者微信号
+		String toUserName = map.get("ToUserName");
+		return String.format("<xml>" +
+				"<ToUserName><![CDATA[%s]]></ToUserName>" +
+				"<FromUserName><![CDATA[%s]]></FromUserName>" +
+				"<CreateTime>%s</CreateTime>" +
+				"<MsgType><![CDATA[text]]></MsgType>" +
+				"<Content><![CDATA[%s]]></Content>" + 
+				"</xml>", 
+				fromUserName, toUserName, getUtcTime(), welcomeMessage);
 	}
 	
 	/**
@@ -123,7 +165,7 @@ public class MessageHandlerUtil {
 				"<CreateTime>%s</CreateTime>" +
 				"<MsgType><![CDATA[text]]></MsgType>" +
 				"<Content><![CDATA[%s]]></Content>" + "</xml>", 
-				toUserName, fromUserName, getUtcTime(), content);
+				fromUserName, toUserName, getUtcTime(), content);
 	}
 	
 	/**
@@ -146,7 +188,7 @@ public class MessageHandlerUtil {
 				"<PicUrl><![CDATA[%s]]></PicUrl>" +
 				"<MediaId><![CDATA[%s]]></MediaId>" +
 				"</xml>",
-				toUserName, fromUserName, getUtcTime(), mediaId);
+				fromUserName, toUserName, getUtcTime(), image.getPicUrl(), image.getMediaId());
 	}
 	
 	
@@ -168,13 +210,13 @@ public class MessageHandlerUtil {
 				"<CreateTime>%s</CreateTime>" +
 				"<MsgType><![CDATA[music]]></MsgType>" +
 				"<Music>" +
-				"   <Title><![CDATA[%s]]></Title>" +
-				"   <Description><![CDATA[%s]]></Description>" +
-				"   <MusicUrl><![CDATA[%s]]></MusicUrl>" +
-				"   <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>" +
+				"<Title><![CDATA[%s]]></Title>" +
+				"<Description><![CDATA[%s]]></Description>" +
+				"<MusicUrl><![CDATA[%s]]></MusicUrl>" +
+				"<HQMusicUrl><![CDATA[%s]]></HQMusicUrl>" +
 				"</Music>" +
 				"</xml>",
-				toUserName, fromUserName, getUtcTime(), music.getTitle(), music.getDescription(), music.getMusicUrl(), music.getHqMusicUrl());
+				fromUserName, toUserName, getUtcTime(), music.getTitle(), music.getDescription(), music.getMusicUrl(), music.getHqMusicUrl());
 	}
 	
 	
@@ -198,7 +240,7 @@ public class MessageHandlerUtil {
 				"<MediaId><![CDATA[%s]]></MediaId>" +
 				"<ThumbMediaId><![CDATA[%s]]></ThumbMediaId>" +
 				"</xml>",
-				toUserName, fromUserName, getUtcTime(), video.getMediaId(), video.getThumbMediaId());
+				fromUserName, toUserName, getUtcTime(), video.getMediaId(), video.getThumbMediaId());
 	}
 	
 	
@@ -209,7 +251,7 @@ public class MessageHandlerUtil {
 	 * @return
 	 * @author yangqing 2017/04/13
 	 */
-	private static String buildVoiceMessage(Map<String, String> map, String mediaId) {
+	private static String buildVoiceMessage(Map<String, String> map, Voice voice) {
 		//发送方帐号
 		String fromUserName = map.get("FromUserName");
 		// 开发者微信号
@@ -219,11 +261,10 @@ public class MessageHandlerUtil {
 				"<FromUserName><![CDATA[%s]]></FromUserName>" +
 				"<CreateTime>%s</CreateTime>" +
 				"<MsgType><![CDATA[voice]]></MsgType>" +
-				"<Voice>" +
-				"   <MediaId><![CDATA[%s]]></MediaId>" +
-				"</Voice>" +
+				"<MediaId><![CDATA[%s]]></MediaId>" +
+				"<Format><![CDATA[%s]]></Format>" +
 				"</xml>",
-				fromUserName, toUserName, getUtcTime(), mediaId);
+				fromUserName, toUserName, getUtcTime(), voice.getMediaId(), voice.getFormat());
 	}
 	
 	
@@ -233,7 +274,8 @@ public class MessageHandlerUtil {
 	 * @return
 	 * @author yangqing 2017/04/13
 	 */
-	private static String buildNewsMessage(Map<String, String> map) {
+	/*---------------------------------------功能待开发-------------------------------------------*/
+	/*private static String buildNewsndMessage(Map<String, String> map) {
 		//发送方帐号
 		String fromUserName = map.get("FromUserName");
 		// 开发者微信号
@@ -265,7 +307,7 @@ public class MessageHandlerUtil {
 				"</Articles>\n" +
 				"</xml> ", fromUserName, toUserName, getUtcTime(), 2, itemContent1 + itemContent2);
 		return content;
-	}
+	}*/
 	
 	/**
 	 * 生成图文消息的一条记录
@@ -273,7 +315,8 @@ public class MessageHandlerUtil {
 	 * @return
 	 * @author yangqing 2017/04/13
 	 */
-	private static String buildSingleItem(NewsItem item) {
+	/*---------------------------------------功能待开发-------------------------------------------*/
+	/*private static String buildSingleItem(NewsItem item) {
 		String itemContent = String.format("<item>\n" +
 				"<Title><![CDATA[%s]]></Title> \n" +
 				"<Description><![CDATA[%s]]></Description>\n" +
@@ -281,7 +324,7 @@ public class MessageHandlerUtil {
 				"<Url><![CDATA[%s]]></Url>\n" +
 				"</item>", item.Title, item.Description, item.PicUrl, item.Url);
 		return itemContent;
-	}
+	}*/
 	
 	/**
 	 * 获取服务器当前时间（时间戳类型）
@@ -307,29 +350,26 @@ public class MessageHandlerUtil {
      * @return
      * @author yangqing 2017/04/13
      */
-    private static String handleTextMessage(Map<String, String> map) {
+	/*private static String handleTextMessage(Map<String, String> map) {
         //响应消息
-        String responseMessage;
+        String responseMessage = "";
         // 消息内容
         String content = map.get("Content");
         switch (content) {
             case "文本":
-                String msgText = "孤傲苍狼又要开始写博客总结了,欢迎朋友们访问我在博客园上面写的博客\n" +
-                        "<a href=\"http://www.cnblogs.com/xdp-gacl\">孤傲苍狼的博客</a>";
+                String msgText = "欢迎您关注“从吾客栈”微信公众号，我们将为您提供便捷的酒店入住预订功能！";
                 responseMessage = buildTextMessage(map, msgText);
                 break;
             case "图片":
                 //通过素材管理接口上传图片时得到的media_id
-                String imgMediaId = "dSQCiEHYB-pgi7ib5KpeoFlqpg09J31H28rex6xKgwWrln3HY0BTsoxnRV-xC_SQ";
-                responseMessage = buildImageMessage(map, imgMediaId);
+                //responseMessage = buildImageMessage(map, image);
                 break;
             case "语音":
                 //通过素材管理接口上传语音文件时得到的media_id
-                String voiceMediaId = "h3ul0TnwaRPut6Tl1Xlf0kk_9aUqtQvfM5Oq21unoWqJrwks505pkMGMbHnCHBBZ";
-                responseMessage = buildVoiceMessage(map,voiceMediaId);
+                //responseMessage = buildVoiceMessage(map,voice);
                 break;
             case "图文":
-                responseMessage = buildNewsMessage(map);
+                //responseMessage = buildNewsMessage(map, news);
                 break;
             case "音乐":
                 Music music = new Music();
@@ -347,12 +387,12 @@ public class MessageHandlerUtil {
                 responseMessage = buildVideoMessage(map, video);
                 break;
             default:
-                responseMessage = buildWelcomeTextMessage(map);
+            	String welcomeMessage = "感谢您关注从吾客栈微信公众号，我们后续为您提供更方便更快捷的功能，敬请您的期待！";
+                responseMessage = buildWelcomeTextMessage(map, welcomeMessage);
                 break;
-
         }
         //返回响应消息
         return responseMessage;
-    }
+    }*/
 	
 }
