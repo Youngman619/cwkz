@@ -36,7 +36,7 @@ public class AccessTokenServlet extends HttpServlet {
 		final String appSecret = getInitParameter("appSecret");
 		
 		
-		//开启一个新线程
+		//开启一个新线程（获取accessToken并根据accessToken创建自定义菜单）
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -68,6 +68,12 @@ public class AccessTokenServlet extends HttpServlet {
 	}
 	
 	
+	/**
+	 * 获取accessToken的调用微信接口方法
+	 * @param appId
+	 * @param appSecret
+	 * @return
+	 */
 	private AccessToken getAccessToken(String appId, String appSecret) {
 		NetWorkHelper netHelper = new NetWorkHelper();
 		/**
@@ -84,6 +90,11 @@ public class AccessTokenServlet extends HttpServlet {
 		token.setAccessToken(json.getString("access_token"));
 		token.setExpiresin(json.getInteger("expires_in"));
 		return token;
+	}
+	
+	private String createMenu(String url, JSONObject menu, String requestType){
+		String resultdata = "";
+		return resultdata;
 	}
 
 }
