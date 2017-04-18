@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import wx.sunl.common.AccessTokenInfo;
 import wx.sunl.entry.AccessToken;
+import wx.sunl.util.ConstructMenuUtil;
 import wx.sunl.util.NetWorkHelper;
 
 /**
@@ -46,6 +47,7 @@ public class AccessTokenServlet extends HttpServlet {
 						AccessTokenInfo.accessToken = getAccessToken(appId, appSecret);
 						//获取成功
 						if (AccessTokenInfo.accessToken != null) {
+							createMenu(AccessTokenInfo.accessToken);
 							//获取到access_token 休眠7000秒,大约2个小时左右
 							Thread.sleep(7000 * 1000);
 							//Thread.sleep(10 * 1000);//10秒钟获取一次
@@ -92,9 +94,25 @@ public class AccessTokenServlet extends HttpServlet {
 		return token;
 	}
 	
-	private String createMenu(String url, JSONObject menu, String requestType){
-		String resultdata = "";
-		return resultdata;
+	/**
+	 * 创建自定义菜单的接口方法
+	 * @param url
+	 * @param menu
+	 * @param requestType
+	 */
+	private void createMenu(AccessToken token){
+		/**
+		 * 接口地址为https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN，
+		 * 其中ACCESS_TOKEN为在访问微信服务器调用微信接口方法获取到的accessToken
+		 * */
+		String url = String.format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s", token.getAccessToken());
+		//调用ConstructMenuUtil构造自定义菜单类获取到的ConstructMenu()方法获取菜单对象
+		ConstructMenuUtil menuUtil = new ConstructMenuUtil();
+		JSONObject menu = menuUtil.ConstructMenu();
+		String menuJson = menu.toString();
+		
+		NetWorkHelper netWorkHelper = new NetWorkHelper();
+		netWorkHelper.getHttpsResponseForCreateMenu(url, "POST", menuJson);
 	}
 
 }
