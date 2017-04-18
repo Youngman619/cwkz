@@ -28,7 +28,7 @@ public class ConstructMenuUtil {
 		Button button3 = new Button();
 		button3.setType("view");
 		button3.setName("房间管理");
-		button3.setUrl("https://mp.weixin.qq.com");
+		button3.setUrl("http://ip262h.natappfree.cc/voastudy/WebContent/index.jsp");
 		
 		button.add(button1);
 		button.add(button2);
