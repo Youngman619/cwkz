@@ -76,7 +76,7 @@ public class AccessTokenServlet extends HttpServlet {
 	 * @param appSecret
 	 * @return
 	 */
-	private AccessToken getAccessToken(String appId, String appSecret) {
+	public static AccessToken getAccessToken(String appId, String appSecret) {
 		NetWorkHelper netHelper = new NetWorkHelper();
 		/**
 		 * 接口地址为https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET，

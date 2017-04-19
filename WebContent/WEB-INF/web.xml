@@ -25,6 +25,13 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>OAuthServlet</display-name>
+		<servlet-name>OAuthServlet</servlet-name>
+		<servlet-class>wx.sunl.servlet.OAuthServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>CoreServlet</servlet-name>
@@ -34,6 +41,10 @@
 	<servlet-mapping>
 		<servlet-name>AccessTokenServlet</servlet-name>
 		<url-pattern>/AccessTokenServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OAuthServlet</servlet-name>
+		<url-pattern>/OAuthServlet</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

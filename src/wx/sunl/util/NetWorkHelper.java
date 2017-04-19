@@ -1,18 +1,16 @@
 package wx.sunl.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.*;
+
+import com.alibaba.fastjson.JSONObject;
 
 public class NetWorkHelper {
 
@@ -115,7 +113,66 @@ public class NetWorkHelper {
 		}
 	}
 	
-	X509TrustManager xtm = new X509TrustManager() {
+	/**
+	 * 发送https请求获取网页授权
+	 * @param requestUrl
+	 * @param requestMethod
+	 * @param params
+	 * @return
+	 */
+	public static JSONObject httpsRequest(String requestUrl, String requestMethod, String params) {
+        JSONObject jsonObject = null;
+        try {
+            // 创建SSLContext对象，并使用我们指定的信任管理器初始化
+            TrustManager[] tm = {xtm};
+            SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
+            sslContext.init(null, tm, new java.security.SecureRandom());
+            // 从上述SSLContext对象中得到SSLSocketFactory对象
+            SSLSocketFactory ssf = sslContext.getSocketFactory();
+
+            URL url = new URL(requestUrl);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setSSLSocketFactory(ssf);
+            
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setUseCaches(false);
+            // 设置请求方式（GET/POST）
+            conn.setRequestMethod(requestMethod);
+
+            // 当outputStr不为null时向输出流写数据
+            if (null != params) {
+                OutputStream outputStream = conn.getOutputStream();
+                // 注意编码格式
+                outputStream.write(params.getBytes("UTF-8"));
+                outputStream.close();
+            }
+
+            // 从输入流读取返回内容
+            InputStream inputStream = conn.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String str = null;
+            StringBuffer buffer = new StringBuffer();
+            while ((str = bufferedReader.readLine()) != null) {
+                buffer.append(str);
+            }
+
+            // 释放资源
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+            inputStream = null;
+            conn.disconnect();
+            jsonObject = JSONObject.parseObject(buffer.toString());
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        return jsonObject;
+    }
+	
+	
+	static X509TrustManager xtm = new X509TrustManager() {
 		
 		@Override
 		public X509Certificate[] getAcceptedIssuers() {
