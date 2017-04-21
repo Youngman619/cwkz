@@ -23,11 +23,11 @@ public class ConstructMenuUtil {
 		button1.setKey("MESSAGE_TODAY_TEXT");
 		Button button2 = new Button();
 		button2.setType("view");
-		button2.setName("客户管理");
+		button2.setName("客户登录");
 		button2.setUrl("https://www.baidu.com");
 		Button button3 = new Button();
 		button3.setType("view");
-		button3.setName("房间管理");
+		button3.setName("员工登录");
 		button3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx90716ffab2e94997&redirect_uri=http://xq8i6e.natappfree.cc/voastudy/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
 		
 		button.add(button1);

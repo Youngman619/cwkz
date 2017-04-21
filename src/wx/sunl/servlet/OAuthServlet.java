@@ -53,7 +53,7 @@ public class OAuthServlet extends HttpServlet {
             request.setAttribute("state", state);
         }
         // Ìø×ªµ½index.jsp
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**
