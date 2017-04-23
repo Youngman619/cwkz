@@ -32,6 +32,13 @@
 		<servlet-name>OAuthServlet</servlet-name>
 		<servlet-class>wx.sunl.servlet.OAuthServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>EmpLoginServlet</display-name>
+		<servlet-name>EmpLoginServlet</servlet-name>
+		<servlet-class>wx.sunl.servlet.EmpLoginServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>CoreServlet</servlet-name>
@@ -45,5 +52,9 @@
 	<servlet-mapping>
 		<servlet-name>OAuthServlet</servlet-name>
 		<url-pattern>/OAuthServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EmpLoginServlet</servlet-name>
+		<url-pattern>/EmpLoginServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

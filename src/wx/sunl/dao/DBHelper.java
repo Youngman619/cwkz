@@ -22,7 +22,7 @@ public class DBHelper {
 	 * @param params
 	 * @return
 	 */
-	public boolean excuteSql(String sql, Object[] params){
+	public boolean excuteSql(String sql, String[] params){
 		this.getConnection();
 		boolean res = true;
 		try {
@@ -50,12 +50,12 @@ public class DBHelper {
 	 * @param obj
 	 * @return
 	 */
-	public ResultSet excuteQuery(String sql, Object[] params, Object obj){
+	public ResultSet excuteQuery(String sql, String[] params){
 		this.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
 			for (int i = 0; i < params.length; i++) {
-				pst.setObject(i+1, params[i]);
+				pst.setString(i+1, params[i]);
 			}
 			rst = pst.executeQuery();
 		} catch (SQLException e) {

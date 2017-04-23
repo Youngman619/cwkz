@@ -9,84 +9,26 @@
 <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.0/weui.min.css">
 </head>
 <body>
-<%--     <% 
-       // 获取由OAuthServlet中传入的参数
-       SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
-       String state=request.getAttribute("state").toString();
-       if(null != user) {
-    %>
-    <table width="100%" cellspacing="0" cellpadding="0">
-        <tr><td width="20%">属性</td><td width="80%">值</td></tr>
-        <tr><td>OpenID</td><td><%=user.getOpenId()%></td></tr>
-        <tr><td>昵称</td><td><%=user.getNickname()%></td></tr>
-        <tr><td>性别</td><td><%=user.getSex()%></td></tr>
-        <tr><td>国家</td><td><%=user.getCountry()%></td></tr>
-        <tr><td>省份</td><td><%=user.getProvince()%></td></tr>
-        <tr><td>城市</td><td><%=user.getCity()%></td></tr>
-        <tr><td>头像</td><td><%=user.getHeadImgUrl()%></td></tr>
-        <tr><td>特权</td><td><%=user.getPrivilegeList()%></td></tr>
-        <tr><td>state:</td><td><%=state%></td></tr>
-    </table>
-    <%
-        }
-        else 
-            out.print("用户不同意授权,未获取到用户信息！");
-    %> --%>
-    <div class="weui_grids">
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
+	<form name="EpmLoginForm" method="post" action="/voastudy/EmpLoginServlet">
+		<h1 class="page__title">从吾客栈移动终端</h1>
+		<p class="page__desc">员工登录</p>
+		<div class="weui-cell__hd"><label class="weui-label">员工编号</label></div>
+		<div class="weui-cell__bd">
+            <input id="account" name="account" class="weui-input" type="number" pattern="[0-17]*" placeholder="请输入员工号">
         </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
+        
+        <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+		<div class="weui-cell__bd">
+            <input id="passwd" name="passwd" class="weui-input" type="password" pattern="[0-6]*" placeholder="请输入密码">
         </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
+        
+        <div class="weui-btn-area">
+            <input type="submit" value="确定">
         </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
-        </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
-        </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
-        </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
-        </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
-        </div>
-        <p class="weui_grid_label"></p>
-    </a>
-    <a href="" class="weui_grid">
-        <div class="weui_grid_icon">
-            <img src="" alt="">
-        </div>
-        <p class="weui_grid_label"></p>
-    </a>
-</div>
+	</form>
+	<p class="page__desc" id="errMsg"><%=msg %></p>
 </body>
 </html>
