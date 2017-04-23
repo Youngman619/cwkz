@@ -7,6 +7,7 @@ import java.util.List;
 import wx.sunl.dao.DBHelper;
 import wx.sunl.dao.EmployeeDao;
 import wx.sunl.model.Employee;
+import wx.sunl.model.EmployeeAccount;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	static DBHelper dbh = null;
@@ -18,8 +19,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee login(String account, String passwd) {
-		Employee emp = new Employee();
+	public EmployeeAccount login(String account, String passwd) {
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		ResultSet rst = null;
 		String[] params = new String[2];
 		String sql = "SELECT * FROM tb_emp_account WHERE ACCOUNT = ? AND PASSWD = ?";
@@ -29,22 +30,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		rst = dbh.excuteQuery(sql, params);
 		try {
 			while(rst.next()){
-				emp.setEmpId(rst.getString("EMP_ID"));
-				emp.setEmpNo(rst.getString("EMP_NO"));
-				emp.setEmpName(rst.getString("EMP_NAME"));
-				emp.setEmpDepNo(rst.getString("EMP_DEP_NO"));
-				emp.setEmpJobNo(rst.getString("EMP_JOB_NO"));
-				emp.setInDate(rst.getTimestamp("IN_DATE"));
-				emp.setEmpIDCard(rst.getString("EMP_ID_CARD"));
-				emp.setEmpPhoneNumber1(rst.getString("EMP_PHONE_ONE"));
-				emp.setEmpPhoneNumber2(rst.getString("EMP_PHONE_TWO"));
-				emp.setEmpAddr(rst.getString("EMP_ADDR"));
-				emp.setRemark(rst.getString("REMARK"));
+				employeeAccount.setEmpAccountId(rst.getString("EMP_ACCOUNT_ID"));
+				employeeAccount.setAccount(rst.getString("ACCOUNT"));
+				employeeAccount.setPasswd(rst.getString("PASSWD"));
+				employeeAccount.setLevel(rst.getString("LEVEL"));
+				employeeAccount.setEmpId(rst.getString("EMP_ID"));
+				employeeAccount.setAccountStatus(rst.getString("ACCOUNT_STATUS"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return emp;
+		return employeeAccount;
 	}
 
 	@Override

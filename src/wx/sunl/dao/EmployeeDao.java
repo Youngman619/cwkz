@@ -3,12 +3,13 @@ package wx.sunl.dao;
 import java.util.List;
 
 import wx.sunl.model.Employee;
+import wx.sunl.model.EmployeeAccount;
 
 public interface EmployeeDao {
 	
 	public Employee findById(String empId);
 	
-	public Employee login(String account, String passwd);
+	public EmployeeAccount login(String account, String passwd);
 	
 	public List<Employee> queryAllEmployee();
 	

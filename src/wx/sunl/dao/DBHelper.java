@@ -54,8 +54,10 @@ public class DBHelper {
 		this.getConnection();
 		try {
 			pst = conn.prepareStatement(sql);
-			for (int i = 0; i < params.length; i++) {
-				pst.setString(i+1, params[i]);
+			if(null != params){
+				for (int i = 0; i < params.length; i++) {
+					pst.setString(i+1, params[i]);
+				}
 			}
 			rst = pst.executeQuery();
 		} catch (SQLException e) {
