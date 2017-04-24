@@ -1,7 +1,6 @@
 package wx.sunl.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,10 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.StringUtils;
 
-import wx.sunl.dao.EmployeeDao;
-import wx.sunl.dao.impl.EmployeeDaoImpl;
-import wx.sunl.dao.impl.RoomDaoImpl;
-import wx.sunl.model.Employee;
+import wx.sunl.dao.*;
+import wx.sunl.dao.Impl.EmployeeDaoImpl;
+import wx.sunl.dao.Impl.RoomDaoImpl;
 import wx.sunl.model.EmployeeAccount;
 import wx.sunl.model.Room;
 
@@ -42,13 +40,13 @@ public class EmpLoginServlet extends HttpServlet {
 		String passwd = request.getParameter("passwd");
 		if (!StringUtils.isNullOrEmpty(account) && !StringUtils.isNullOrEmpty(passwd)) {
 			session.setAttribute("account", account);
-			EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+			EmployeeDao empDao = new EmployeeDaoImpl();
 			EmployeeAccount empAccount = new EmployeeAccount();
 			empAccount = empDao.login(account, passwd);
 			if(null != empAccount && null != empAccount.getEmpAccountId()){
-				RoomDaoImpl roomDaoImpl = new RoomDaoImpl();
+				RoomDao roomDao = new RoomDaoImpl();
 				session.setAttribute("empAccount", empAccount);
-				List<Room> roomList = roomDaoImpl.queryAllRoom();
+				List<Room> roomList = roomDao.queryAllRoom();
 				request.setAttribute("roomList", roomList);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
