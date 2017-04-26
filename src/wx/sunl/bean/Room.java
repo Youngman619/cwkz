@@ -1,4 +1,4 @@
-package wx.sunl.model;
+package wx.sunl.bean;
 
 public class Room {
 	private String roomId;

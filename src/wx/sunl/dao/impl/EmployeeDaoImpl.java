@@ -1,13 +1,13 @@
-package wx.sunl.dao.Impl;
+package wx.sunl.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import wx.sunl.bean.Employee;
+import wx.sunl.bean.EmployeeAccount;
 import wx.sunl.dao.DBHelper;
 import wx.sunl.dao.EmployeeDao;
-import wx.sunl.model.Employee;
-import wx.sunl.model.EmployeeAccount;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	static DBHelper dbh = null;

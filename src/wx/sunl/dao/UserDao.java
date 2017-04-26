@@ -2,7 +2,8 @@ package wx.sunl.dao;
 
 import java.util.List;
 
-import wx.sunl.model.User;
+import wx.sunl.bean.User;
+
 
 public interface UserDao {
 	

@@ -2,7 +2,7 @@ package wx.sunl.dao;
 
 import java.util.List;
 
-import wx.sunl.model.Room;
+import wx.sunl.bean.Room;
 
 public interface RoomDao {
 	

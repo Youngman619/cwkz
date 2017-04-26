@@ -1,4 +1,4 @@
-package wx.sunl.model;
+package wx.sunl.bean;
 
 public class User {
 	private String userId;

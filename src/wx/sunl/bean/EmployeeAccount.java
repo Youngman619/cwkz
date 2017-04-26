@@ -1,23 +1,17 @@
-package wx.sunl.model;
+package wx.sunl.bean;
 
-public class UserAccount {
-	private String userAccountId;
-	private String userId;
+public class EmployeeAccount {
+	private String empAccountId;
 	private String account;
 	private String passwd;
 	private String level;
+	private String empId;
 	private String accountStatus;
-	public String getUserAccountId() {
-		return userAccountId;
+	public String getEmpAccountId() {
+		return empAccountId;
 	}
-	public void setUserAccountId(String userAccountId) {
-		this.userAccountId = userAccountId;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setEmpAccountId(String empAccountId) {
+		this.empAccountId = empAccountId;
 	}
 	public String getAccount() {
 		return account;
@@ -36,6 +30,12 @@ public class UserAccount {
 	}
 	public void setLevel(String level) {
 		this.level = level;
+	}
+	public String getEmpId() {
+		return empId;
+	}
+	public void setEmpId(String empId) {
+		this.empId = empId;
 	}
 	public String getAccountStatus() {
 		return accountStatus;

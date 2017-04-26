@@ -1,13 +1,13 @@
-package wx.sunl.dao.Impl;
+package wx.sunl.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import wx.sunl.bean.Room;
 import wx.sunl.dao.DBHelper;
 import wx.sunl.dao.RoomDao;
-import wx.sunl.model.Room;
 
 public class RoomDaoImpl implements RoomDao {
 

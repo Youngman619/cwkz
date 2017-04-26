@@ -2,8 +2,9 @@ package wx.sunl.dao;
 
 import java.util.List;
 
-import wx.sunl.model.Employee;
-import wx.sunl.model.EmployeeAccount;
+import wx.sunl.bean.Employee;
+import wx.sunl.bean.EmployeeAccount;
+
 
 public interface EmployeeDao {
 	

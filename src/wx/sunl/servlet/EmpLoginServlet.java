@@ -11,11 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.StringUtils;
 
+import wx.sunl.bean.EmployeeAccount;
+import wx.sunl.bean.Room;
 import wx.sunl.dao.*;
-import wx.sunl.dao.Impl.EmployeeDaoImpl;
-import wx.sunl.dao.Impl.RoomDaoImpl;
-import wx.sunl.model.EmployeeAccount;
-import wx.sunl.model.Room;
+import wx.sunl.dao.impl.EmployeeDaoImpl;
+import wx.sunl.dao.impl.RoomDaoImpl;
 
 /**
  * Servlet implementation class EmpLoginServlet
