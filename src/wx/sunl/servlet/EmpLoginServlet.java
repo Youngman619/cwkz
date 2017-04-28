@@ -44,9 +44,11 @@ public class EmpLoginServlet extends HttpServlet {
 			EmployeeAccount empAccount = new EmployeeAccount();
 			empAccount = empDao.login(account, passwd);
 			if(null != empAccount && null != empAccount.getEmpAccountId()){
+				//查询房间数据
 				RoomDao roomDao = new RoomDaoImpl();
 				session.setAttribute("empAccount", empAccount);
 				List<Room> roomList = roomDao.queryAllRoom();
+				//查询订单数据
 				request.setAttribute("roomList", roomList);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
