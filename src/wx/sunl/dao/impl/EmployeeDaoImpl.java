@@ -14,8 +14,31 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee findById(String empId) {
-		// TODO Auto-generated method stub
-		return null;
+		Employee employee = new Employee();
+		ResultSet rst = null;
+		String[] params = new String[1];
+		String sql = "SELECT * FROM tb_emp WHERE EMP_ID = ?";
+		params[0] = empId;
+		dbh = new DBHelper();
+		rst = dbh.excuteQuery(sql, params);
+		try {
+			while(rst.next()){
+				employee.setEmpId(rst.getString("EMP_ID"));
+				employee.setEmpNo(rst.getString("EMP_NO"));
+				employee.setEmpName(rst.getString("EMP_NAME"));
+				employee.setEmpDepNo(rst.getString("EMP_DEP_NO"));
+				employee.setEmpJobNo(rst.getString("EMP_JOB_NO"));
+				employee.setInDate(rst.getTimestamp("IN_DATE"));
+				employee.setEmpIDCard(rst.getString("EMP_ID_CARD"));
+				employee.setEmpPhoneNumber1(rst.getString("EMP_PHONE_ONE"));
+				employee.setEmpPhoneNumber2(rst.getString("EMP_PHONE_TWO"));
+				employee.setEmpAddr(rst.getString("EMP_ADDR"));
+				employee.setRemark(rst.getString("REMARK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return employee;
 	}
 
 	@Override

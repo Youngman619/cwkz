@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.StringUtils;
 
+import wx.sunl.bean.Employee;
 import wx.sunl.bean.EmployeeAccount;
 import wx.sunl.bean.Room;
 import wx.sunl.dao.*;
@@ -44,11 +45,17 @@ public class EmpLoginServlet extends HttpServlet {
 			EmployeeAccount empAccount = new EmployeeAccount();
 			empAccount = empDao.login(account, passwd);
 			if(null != empAccount && null != empAccount.getEmpAccountId()){
+				//查询员工个人信息数据
+				Employee employee = empDao.findById(empAccount.getEmpId());
+				if(null != employee){
+					session.setAttribute("employee", employee);
+				}
 				//查询房间数据
 				RoomDao roomDao = new RoomDaoImpl();
 				session.setAttribute("empAccount", empAccount);
 				List<Room> roomList = roomDao.queryAllRoom();
 				//查询订单数据
+				
 				request.setAttribute("roomList", roomList);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{

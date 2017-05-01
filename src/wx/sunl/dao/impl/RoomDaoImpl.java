@@ -15,8 +15,31 @@ public class RoomDaoImpl implements RoomDao {
 	
 	@Override
 	public Room findById(String roomId) {
-		// TODO Auto-generated method stub
-		return null;
+		Room room = null;
+		ResultSet rst = null;
+		String[] params = new String[1];
+		String sql = "SELECT * FROM tb_room WHERE ROOM_ID = ?";
+		params[0] = roomId;
+		dbh = new DBHelper();
+		rst = dbh.excuteQuery(sql, params);
+		try {
+			while(rst.next()){
+				room = new Room();
+				room.setRoomId(rst.getString("ROOM_ID"));
+				room.setRoomNo(rst.getString("ROOM_NO"));
+				room.setRoomType(rst.getString("ROOM_TYPE"));
+				room.setRoomFloor(rst.getString("ROOM_FLOOR"));
+				room.setRoomPosition(rst.getString("ROOM_POSITION"));
+				room.setIsWifi(rst.getString("IS_WIFI"));
+				room.setIsNet(rst.getString("IS_NET"));
+				room.setRoomArea(rst.getDouble("ROOM_AREA"));
+				room.setIsLock(rst.getString("IS_LOCK"));
+				room.setRemark(rst.getString("REMARK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return room;
 	}
 
 	@Override

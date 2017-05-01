@@ -3,13 +3,14 @@ package wx.sunl.dao;
 import java.util.List;
 
 import wx.sunl.bean.User;
+import wx.sunl.bean.UserAccount;
 
 
 public interface UserDao {
 	
 	public User findById(String userId);
 	
-	public User Login(String account, String passwd);
+	public UserAccount Login(String account, String passwd);
 	
 	public List<User> queryAllUesr();
 	
