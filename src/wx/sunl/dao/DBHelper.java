@@ -28,7 +28,7 @@ public class DBHelper {
 		try {
 			pst = conn.prepareStatement(sql);
 			for (int i = 0; i < params.length; i++) {
-				pst.setObject(i+1, params[i]);
+				pst.setString(i+1, params[i]);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

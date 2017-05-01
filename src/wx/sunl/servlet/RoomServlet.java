@@ -41,7 +41,15 @@ public class RoomServlet extends HttpServlet {
 				Room room = this.queryOne(roomId);
 				request.setAttribute("room", room);
 			}
-			
+			if(method.equals("save")){
+				
+			}
+			if(method.equals("update")){
+							
+			}
+			if(method.equals("delete")){
+				
+			}
 		}
 		request.getRequestDispatcher("roomList.jsp").forward(request, response);
 	}
