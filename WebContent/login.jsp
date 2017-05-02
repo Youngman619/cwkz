@@ -11,8 +11,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-	<h1 style="margin: 0 auto;">从吾客栈移动终端</h1>
-	<p class="weui-msg__desc">员工登录</p>
+	<h1 style="text-align: center;color: green;">从吾客栈终端系统</h1>
+	<p class="weui-msg__desc" style="text-align: center;">——企业端</p>
 	<form name="EpmLoginForm" method="post" action="/voastudy/EmpLoginServlet" id="EpmLoginForm" class="weui-cells weui-cells_form">
 		<div class="weui-cell">
 			<div class="weui-cell__hd"><label class="weui-label">员工编号</label></div>

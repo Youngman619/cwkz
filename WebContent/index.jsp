@@ -11,7 +11,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, minimum-scale=1,user-scalable=0">
 <title>微信学习</title>
 <link rel="stylesheet" href="weui-1.0.0/dist/style/weui.min.css">
-<link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.0/weui.min.css">
 <script src="weui/dist/lib/jquery-2.1.4.js"></script>
 </head>
 <body ontouchstart>
@@ -41,7 +40,7 @@
 	            <div class="weui-cell weui-cell_access">
 	                <div class="weui-cell__bd">
 	                    <span style="vertical-align: middle">房间列表</span>
-	                    <span class="weui-badge" style="margin-left: 5px;"><%=roomList.size() %></span>
+	                    <span class="weui-badge" style="margin-left: 5px;color: green;"><%=roomList.size() %></span>
 	                </div>
 	                <div class="weui-cell__ft" id="roomArray"></div>
 	            </div>

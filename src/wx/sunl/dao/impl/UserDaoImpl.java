@@ -9,6 +9,7 @@ import wx.sunl.bean.User;
 import wx.sunl.bean.UserAccount;
 import wx.sunl.dao.DBHelper;
 import wx.sunl.dao.UserDao;
+import wx.sunl.util.CreateUUID;
 
 public class UserDaoImpl implements UserDao {
 	
@@ -95,8 +96,36 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean saveOrUpdate(User user, String order) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		String sql = null;
+		String[] params = null;
+		dbh = new DBHelper();
+		if(order.equals("save")){
+			sql = "INSERT INTO tb_user VALUES(?,?,?,?,?,?,?,?)";
+			params = new String[8];
+			params[0] = CreateUUID.getUUID();
+			params[1] = user.getUserName();
+			params[2] = user.getUserSex();
+			params[3] = user.getUserIDCard();
+			params[4] = user.getUserPhoneNumber1();
+			params[5] = user.getUserPhoneNumber2();
+			params[6] = user.getUserAddr();
+			params[7] = user.getRemark();
+			flag = dbh.excuteSql(sql, params);
+		}else{
+			sql = "UPDATE tb_user SET USER_NAME=?,USER_SEX=?,USER_ID_CARD=?,USER_PHONE_ONE=?,USER_PHONE_TWO=?,USER_ADDR=?,REMARK=? WHERE USER_ID=?";
+			params = new String[8];
+			params[0] = user.getUserName();
+			params[1] = user.getUserSex();
+			params[2] = user.getUserIDCard();
+			params[3] = user.getUserPhoneNumber1();
+			params[4] = user.getUserPhoneNumber2();
+			params[5] = user.getUserAddr();
+			params[6] = user.getRemark();
+			params[7] = user.getUserId();
+			flag = dbh.excuteSql(sql, params);
+		}
+		return flag;
 	}
 
 	@Override

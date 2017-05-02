@@ -30,6 +30,7 @@ public class DBHelper {
 			for (int i = 0; i < params.length; i++) {
 				pst.setString(i+1, params[i]);
 			}
+			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			res = false;

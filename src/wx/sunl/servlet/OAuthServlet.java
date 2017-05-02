@@ -33,6 +33,8 @@ public class OAuthServlet extends HttpServlet {
         // 用户同意授权后，能获取到code
         String code = request.getParameter("code");
         String state = request.getParameter("state");
+        String userType = request.getParameter("userType");
+        
         // 用户同意授权
         if (!"authdeny".equals(code)) {
         	String APPID = "wx90716ffab2e94997";
@@ -52,8 +54,9 @@ public class OAuthServlet extends HttpServlet {
             request.setAttribute("snsUserInfo", snsUserInfo);
             request.setAttribute("state", state);
         }
-        // 跳转到index.jsp
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+    	/*request.getRequestDispatcher("login.jsp").forward(request, response);*/
+    	request.getRequestDispatcher("userLogin.jsp").forward(request, response);
+        
 	}
 
 	/**

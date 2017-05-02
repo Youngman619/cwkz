@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Orders {
 	private String orderId;
-	private String ooderNo;
+	private String orderNo;
 	private Timestamp createTime;
 	private String roomNo;
 	private String roomId;
@@ -23,11 +23,11 @@ public class Orders {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getOoderNo() {
-		return ooderNo;
+	public String getOrderNo() {
+		return orderNo;
 	}
-	public void setOoderNo(String ooderNo) {
-		this.ooderNo = ooderNo;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 	public Timestamp getCreateTime() {
 		return createTime;

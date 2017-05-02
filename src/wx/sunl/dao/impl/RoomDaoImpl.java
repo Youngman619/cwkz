@@ -75,9 +75,10 @@ public class RoomDaoImpl implements RoomDao {
 		boolean flag = false;
 		String sql = null;
 		String[] params = null;
+		dbh = new DBHelper();
 		if(order.equals("save")){
-			sql = "INSERT INTO tb_room VALUES(?,?,?,?,?,?,?,?,?)";
-			params = new String[9];
+			sql = "INSERT INTO tb_room VALUES(?,?,?,?,?,?,?,?,?,?)";
+			params = new String[10];
 			params[0] = CreateUUID.getUUID();
 			params[1] = room.getRoomNo();
 			params[2] = room.getRoomType();
@@ -86,9 +87,26 @@ public class RoomDaoImpl implements RoomDao {
 			params[5] = room.getIsWifi();
 			params[6] = room.getIsNet();
 			params[7] = String.valueOf(room.getRoomArea());
-			params[8] = room.getRemark();
+			params[8] = room.getIsLock();
+			params[9] = room.getRemark();
+			flag = dbh.excuteSql(sql, params);
 		}
-		return false;
+		if(order.equals("update")){
+			sql = "UPDATE tb_room SET ROOM_NO=?,ROOM_TYPE=?,ROOM_FLOOR=?,ROOM_POSITION=?,IS_WIFI=?,IS_NET=?,ROOM_AREA=?,IS_LOCK=?,REMARK=? WHERE ROOM_ID=?";
+			params = new String[10];
+			params[0] = room.getRoomNo();
+			params[1] = room.getRoomType();
+			params[2] = room.getRoomFloor();
+			params[3] = room.getRoomPosition();
+			params[4] = room.getIsWifi();
+			params[5] = room.getIsNet();
+			params[6] = String.valueOf(room.getRoomArea());
+			params[7] = room.getIsLock();
+			params[8] = room.getRemark();
+			params[9] = room.getRoomId();
+			flag = dbh.excuteSql(sql, params);
+		}
+		return flag;
 	}
 
 	@Override
