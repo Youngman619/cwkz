@@ -6,17 +6,72 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, minimum-scale=1,user-scalable=0">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <title>微信学习</title>
-<link rel="stylesheet" href="weui-1.0.0/dist/style/weui.min.css">
+<link rel="stylesheet" href="weui-1.1.0/dist/style/weui.css">
+<link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.css">
 <script src="weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="bootstrap-3.3.7/dist/js/bootstrap.js"></script>
 </head>
 <body ontouchstart>
-	<p class="weui-msg__desc">尊敬的用户：${user.userPhoneNumber1}</p>
-	<hr>
-	
+	<div class="page">
+	    <div class="page__bd" style="height: 100%;">
+			<p class="weui-msg__desc">尊敬的用户：<span style="color: #00AA00;">${user.userPhoneNumber1}</span>,欢迎您预订西安-从吾客栈</p>
+			<!-- 滚动图片  -->
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			  <div class="carousel-inner" role="listbox">
+			    <div class="item active">
+			      <img src="imanges/cwkz01.jpg" alt="...">
+			      <div class="carousel-caption">
+			       	 洁白如画的中堂，让您静心怡神。
+			      </div>
+			    </div>
+			    <div class="item">
+			      <img src="imanges/cwkz02.jpg" alt="...">
+			      <div class="carousel-caption">
+			       	 低调奢华的现代化房间，一应俱全。
+			      </div>
+			    </div>
+			    <div class="item">
+			      <img src="imanges/cwkz03.jpg" alt="...">
+			      <div class="carousel-caption">
+			                          古香古色的后院，坐谈禅茶之道。
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+		    <div class="weui-dialog" style="margin-top: -5%;">
+		        <div class="weui-dialog__hd"><strong class="weui-dialog__title">预订信息</strong></div>
+		        <div class="weui-dialog__bd">在预定前请确认您的个人信息已完善</div>
+		        
+		        <div class="weui-dialog__ft">
+		            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+		        </div>
+		    </div>
+			<div class="weui-tab" style="position: static;bottom: 0;">
+			    <div class="weui-tab__panel">
+					
+			    </div>
+			    <div class="weui-tabbar">
+			        <a href="javascript:;" class="weui-tabbar__item">
+			            <img src="weui-1.0.0/dist/example/images/icon_nav_cell.png" alt="" class="weui-tabbar__icon">
+			            <p class="weui-tabbar__label">个人资料</p>
+			        </a>
+			        <a href="javascript:;" class="weui-tabbar__item">
+			            <img src="weui-1.0.0/dist/example/images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
+			            <p class="weui-tabbar__label">我的订单</p>
+			        </a>
+			        <a href="javascript:;" class="weui-tabbar__item">
+			            <img src="weui-1.0.0/dist/example/images/icon_nav_panel.png" alt="" class="weui-tabbar__icon">
+			            <p class="weui-tabbar__label">投诉建议</p>
+			        </a>
+			    </div>
+			</div>
+		</div>
+	</div>
 </body>
-<script type="text/javascript">
-	
+<script>
+   
 </script>
 </html>

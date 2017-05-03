@@ -47,6 +47,7 @@
 	            <div class="weui-cell weui-cell_access">
 	                <div class="weui-cell__bd">
 	                    <span style="vertical-align: middle">公告列表</span>
+	                    <span class="weui-badge" style="margin-left: 5px;">8</span>
 	                </div>
 	                <div class="weui-cell__ft" id="infoArray">详细信息</div>
 	            </div>
