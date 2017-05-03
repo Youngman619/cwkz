@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import wx.sunl.bean.User;
 import wx.sunl.dao.UserDao;
-import wx.sunl.dao.impl.UserDaoImpl;
+import wx.sunl.dao.Impl.UserDaoImpl;
 
 /**
  * Servlet implementation class UserLoginServlet

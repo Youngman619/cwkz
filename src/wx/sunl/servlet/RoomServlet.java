@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import wx.sunl.bean.Room;
 import wx.sunl.dao.RoomDao;
-import wx.sunl.dao.impl.RoomDaoImpl;
+import wx.sunl.dao.Impl.RoomDaoImpl;
 
 /**
  * Servlet implementation class RoomServlet

@@ -15,8 +15,8 @@ import wx.sunl.bean.Employee;
 import wx.sunl.bean.EmployeeAccount;
 import wx.sunl.bean.Room;
 import wx.sunl.dao.*;
-import wx.sunl.dao.impl.EmployeeDaoImpl;
-import wx.sunl.dao.impl.RoomDaoImpl;
+import wx.sunl.dao.Impl.EmployeeDaoImpl;
+import wx.sunl.dao.Impl.RoomDaoImpl;
 
 /**
  * Servlet implementation class EmpLoginServlet

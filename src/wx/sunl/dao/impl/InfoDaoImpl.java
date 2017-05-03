@@ -1,4 +1,4 @@
-package wx.sunl.dao.impl;
+package wx.sunl.dao.Impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
