@@ -10,9 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, minimum-scale=1,user-scalable=0">
 <title>微信学习</title>
-<link rel="stylesheet" href="weui-1.0.0/dist/style/weui.min.css">
+<link rel="stylesheet" href="weui-1.1.0/css/weui.css">
 <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/0.4.0/weui.min.css">
-<script src="weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="weui-1.1.0/js/jquery-2.1.4.js"></script>
 </head>
 <body ontouchstart>
 	<div class="page badge js_show">
@@ -24,7 +24,7 @@
 		<c:forEach items="${roomList}" var="room" varStatus="status">
 			<a class="weui-grid" id="room${status.index}">
 		       <div class="weui-grid__icon">
-		           <img src="weui-1.0.0/src/example/images/icon_tabbar.png" alt="">
+		           <img src="weui-1.1.0/images/icon_tabbar.png" alt="">
 		       </div>
 		       <p class="weui-grid__label">
 		           ${room.roomNo}

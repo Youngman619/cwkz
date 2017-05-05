@@ -8,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <title>微信学习</title>
-<link rel="stylesheet" href="weui-1.1.0/dist/style/weui.css">
-<link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.css">
-<script src="weui/dist/lib/jquery-2.1.4.js"></script>
-<script src="bootstrap-3.3.7/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="weui-1.1.0/css/weui.css">
+<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.css">
+<script src="weui-1.1.0/js/jquery-2.1.4.js"></script>
+<script src="bootstrap-3.3.7/js/bootstrap.js"></script>
 </head>
 <body ontouchstart>
 	<div class="page">
@@ -40,30 +40,40 @@
 			    </div>
 			  </div>
 			</div>
-			
+
 		    <div class="weui-dialog" style="margin-top: -5%;">
 		        <div class="weui-dialog__hd"><strong class="weui-dialog__title">预订信息</strong></div>
 		        <div class="weui-dialog__bd">在预定前请确认您的个人信息已完善</div>
-		        
+		        <form name="bookingInfo" id="bookingInfo" method="post" action="" class="weui-cells weui-cells_form">
+		        	<div class="weui-cell">
+		                <div class="weui-cell__hd">
+		                	<label for="" class="weui-label">入住日期</label>
+		                </div>
+		                <div class="weui-cell__bd">
+		                    <input class="weui-input" type="date" value=""/>
+		                </div>
+		            </div>
+		        </form>
 		        <div class="weui-dialog__ft">
-		            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+		        	<a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
 		        </div>
 		    </div>
+		    
 			<div class="weui-tab" style="position: static;bottom: 0;">
 			    <div class="weui-tab__panel">
 					
 			    </div>
 			    <div class="weui-tabbar">
 			        <a href="javascript:;" class="weui-tabbar__item">
-			            <img src="weui-1.0.0/dist/example/images/icon_nav_cell.png" alt="" class="weui-tabbar__icon">
+			            <img src="weui-1.1.0/images/icon_nav_cell.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">个人资料</p>
 			        </a>
 			        <a href="javascript:;" class="weui-tabbar__item">
-			            <img src="weui-1.0.0/dist/example/images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
+			            <img src="weui-1.1.0/images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">我的订单</p>
 			        </a>
 			        <a href="javascript:;" class="weui-tabbar__item">
-			            <img src="weui-1.0.0/dist/example/images/icon_nav_panel.png" alt="" class="weui-tabbar__icon">
+			            <img src="weui-1.1.0/images/icon_nav_panel.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">投诉建议</p>
 			        </a>
 			    </div>
@@ -72,6 +82,6 @@
 	</div>
 </body>
 <script>
-   
+
 </script>
 </html>
