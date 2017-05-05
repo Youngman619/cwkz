@@ -10,8 +10,13 @@
 <title>微信学习</title>
 <link rel="stylesheet" href="weui-1.1.0/css/weui.css">
 <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.css">
+<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap-select.css">
 <script src="weui-1.1.0/js/jquery-2.1.4.js"></script>
+<script src="weui-1.1.0/js/fastclick.js"></script>
+<script src="weui-1.1.0/js/jquery-weui.js"></script>
 <script src="bootstrap-3.3.7/js/bootstrap.js"></script>
+<script src="bootstrap-3.3.7/js/bootstrap-select.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 </head>
 <body ontouchstart>
 	<div class="page">
@@ -41,16 +46,45 @@
 			  </div>
 			</div>
 
-		    <div class="weui-dialog" style="margin-top: -5%;">
+		    <div class="weui-dialog" style="margin-top: 20%;">
 		        <div class="weui-dialog__hd"><strong class="weui-dialog__title">预订信息</strong></div>
 		        <div class="weui-dialog__bd">在预定前请确认您的个人信息已完善</div>
 		        <form name="bookingInfo" id="bookingInfo" method="post" action="" class="weui-cells weui-cells_form">
+		        	<div class="weui-cell">
+				        <div class="weui-cell__hd">
+				        	<label for="date" class="weui-label">房型选择</label>
+				        </div>
+				        <div class="weui-cell__bd">
+				          <select class= "form-control selectpicker" title='请选择'>
+							  <option value="PD">普通大床</option>
+							  <option value="PB">普通标间</option>
+							  <option value="HD">豪华大床</option>
+							  <option value="HB">豪华标间</option>
+							</select>
+				        </div>
+			      	</div>
 		        	<div class="weui-cell">
 		                <div class="weui-cell__hd">
 		                	<label for="" class="weui-label">入住日期</label>
 		                </div>
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="date" value=""/>
+		                    <input class="weui-input" type="datetime-local" value="" name="checkInDate"/>
+		                </div>
+		            </div>
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd">
+		                	<label for="" class="weui-label">退住日期</label>
+		                </div>
+		                <div class="weui-cell__bd">
+		                    <input class="weui-input" type="datetime-local" value="" name="checkOutDate"/>
+		                </div>
+		            </div>
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd">
+		                	<label for="" class="weui-label">备注要求</label>
+		                </div>
+		                <div class="weui-cell__bd">
+		                    <input class="weui-input" type="text" value="" name="remark"/>
 		                </div>
 		            </div>
 		        </form>
