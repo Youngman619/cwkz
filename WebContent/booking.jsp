@@ -98,7 +98,7 @@
 					
 			    </div>
 			    <div class="weui-tabbar">
-			        <a href="javascript:;" class="weui-tabbar__item">
+			        <a href="userInfo.jsp" class="weui-tabbar__item">
 			            <img src="weui-1.1.0/images/icon_nav_cell.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">个人资料</p>
 			        </a>
@@ -116,6 +116,5 @@
 	</div>
 </body>
 <script>
-
 </script>
 </html>
