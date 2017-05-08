@@ -55,7 +55,7 @@
 				        	<label for="date" class="weui-label">房型选择</label>
 				        </div>
 				        <div class="weui-cell__bd">
-				          <select class= "form-control selectpicker" title='请选择'>
+				          <select class= "form-control selectpicker" title='请选择' id="roomType" name="roomType">
 							  <option value="PD">普通大床</option>
 							  <option value="PB">普通标间</option>
 							  <option value="HD">豪华大床</option>
@@ -68,7 +68,7 @@
 		                	<label for="" class="weui-label">入住日期</label>
 		                </div>
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="datetime-local" value="" name="checkInDate"/>
+		                    <input class="weui-input" type="datetime-local" value="" name="checkInTime" id="checkInTime"/>
 		                </div>
 		            </div>
 		            <div class="weui-cell">
@@ -76,7 +76,7 @@
 		                	<label for="" class="weui-label">退住日期</label>
 		                </div>
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="datetime-local" value="" name="checkOutDate"/>
+		                    <input class="weui-input" type="datetime-local" value="" name="checkOutTime" id="checkOutTime"/>
 		                </div>
 		            </div>
 		            <div class="weui-cell">
@@ -84,12 +84,12 @@
 		                	<label for="" class="weui-label">备注要求</label>
 		                </div>
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="text" value="" name="remark"/>
+		                    <input class="weui-input" type="text" value="" name="remark" id="remark"/>
 		                </div>
 		            </div>
 		        </form>
 		        <div class="weui-dialog__ft">
-		        	<a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+		        	<a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="submitButton">确定</a>
 		        </div>
 		    </div>
 		    
@@ -102,7 +102,7 @@
 			            <img src="weui-1.1.0/images/icon_nav_cell.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">个人资料</p>
 			        </a>
-			        <a href="javascript:;" class="weui-tabbar__item">
+			        <a href="<%=request.getContextPath()%>/OrderServlet?method=queryAll&userId=${user.userId}" class="weui-tabbar__item">
 			            <img src="weui-1.1.0/images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">我的订单</p>
 			        </a>
@@ -116,5 +116,8 @@
 	</div>
 </body>
 <script>
+$('#submitButton').click(function(){
+	$('#bookingInfo').submit();
+});
 </script>
 </html>

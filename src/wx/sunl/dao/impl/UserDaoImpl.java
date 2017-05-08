@@ -9,7 +9,6 @@ import wx.sunl.bean.User;
 import wx.sunl.bean.UserAccount;
 import wx.sunl.dao.DBHelper;
 import wx.sunl.dao.UserDao;
-import wx.sunl.util.CreateUUID;
 
 public class UserDaoImpl implements UserDao {
 	
@@ -99,11 +98,12 @@ public class UserDaoImpl implements UserDao {
 		boolean flag = false;
 		String sql = null;
 		String[] params = null;
+		String userId = user.getUserId();
 		dbh = new DBHelper();
 		if(order.equals("save")){
 			sql = "INSERT INTO tb_user VALUES(?,?,?,?,?,?,?,?)";
 			params = new String[8];
-			params[0] = CreateUUID.getUUID();
+			params[0] = userId;
 			params[1] = user.getUserName();
 			params[2] = user.getUserSex();
 			params[3] = user.getUserIDCard();

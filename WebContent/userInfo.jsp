@@ -16,11 +16,11 @@
 	 <header class='demos-header'>
       <h1 class="demos-title">个人信息</h1>
      </header>
-    <div class="weui-cells weui-cells_form">
+     <form name="UserInfoForm" method="post" action="/voastudy/UserServlet" id="UserInfoForm" class="weui-cells weui-cells_form">
     	<div class="weui-cell">
 	        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="您的姓名" value="${user.userName}">
+	          <input class="weui-input" id="userName" name="userName" type="text" placeholder="您的姓名" value="${user.userName}">
 	        </div>
 	    </div>
 	    <div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -28,7 +28,7 @@
 	          <label for="" class="weui-label">性别</label>
 	        </div>
 	        <div class="weui-cell__bd">
-	          <select class="weui-select" name="userSex">
+	          <select class="weui-select" id="userSex" name="userSex">
 	            <option value="0">女性</option>
 	            <option value="1">男性</option>
 	          </select>
@@ -37,14 +37,14 @@
 	    <div class="weui-cell">
 	        <div class="weui-cell__hd"><label class="weui-label">身份证号码</label></div>
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="number" pattern="[0-9]*" placeholder="您的身份证号码">
+	          <input class="weui-input" id="userIDCard" name="userIDCard" type="number" pattern="[0-9]*" placeholder="您的身份证号码">
 	        </div>
 	    </div>
-	        <div class="weui-cells__title">手机号码</div>
+	    <div class="weui-cells__title">手机号码</div>
 	    <div class="weui-cells">
 	      	<div class="weui-cell weui-cell_select weui-cell_select-before">
 		        <div class="weui-cell__hd">
-		          	<select class="weui-select" name="select2">
+		          	<select class="weui-select" id="userPhoneNumber1" name="userPhoneNumber1">
 			            <option value="1">+86</option>
 			            <option value="2">+80</option>
 			            <option value="3">+84</option>
@@ -56,11 +56,14 @@
 		        </div>
 	      	</div>
 	    </div>
-    </div>
+	    <div class="weui-btn-area">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="submitButton">保存</a>
+        </div>
+    </form>
 </body>
 <script type="text/javascript">	
 	$('#submitButton').click(function(){
-		$('#EpmLoginForm').submit();
+		$('#UserInfoForm').submit();
 	});
 </script>
 </html>

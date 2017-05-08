@@ -8,14 +8,16 @@ public class Orders {
 	private Timestamp createTime;
 	private String roomNo;
 	private String roomId;
+	private String roomType;
 	private String orderStatus;
 	private Timestamp handleTime;
 	private String empNo;
 	private String empId;
 	private String userName;
 	private String userId;
-	private Timestamp planInTime;
-	private String planInDays;
+	private Timestamp checkInTime;
+	private Timestamp checkOutTime;
+	private String checkInDays;
 	private String remark;
 	public String getOrderId() {
 		return orderId;
@@ -46,6 +48,12 @@ public class Orders {
 	}
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
+	}
+	public String getRoomType() {
+		return roomType;
+	}
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
 	}
 	public String getOrderStatus() {
 		return orderStatus;
@@ -83,17 +91,23 @@ public class Orders {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Timestamp getPlanInTime() {
-		return planInTime;
+	public Timestamp getCheckInTime() {
+		return checkInTime;
 	}
-	public void setPlanInTime(Timestamp planInTime) {
-		this.planInTime = planInTime;
+	public void setCheckInTime(Timestamp checkInTime) {
+		this.checkInTime = checkInTime;
 	}
-	public String getPlanInDays() {
-		return planInDays;
+	public Timestamp getCheckOutTime() {
+		return checkOutTime;
 	}
-	public void setPlanInDays(String planInDays) {
-		this.planInDays = planInDays;
+	public void setCheckOutTime(Timestamp checkOutTime) {
+		this.checkOutTime = checkOutTime;
+	}
+	public String getCheckInDays() {
+		return checkInDays;
+	}
+	public void setCheckInDays(String checkInDays) {
+		this.checkInDays = checkInDays;
 	}
 	public String getRemark() {
 		return remark;

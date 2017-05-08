@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import wx.sunl.bean.User;
 import wx.sunl.dao.UserDao;
 import wx.sunl.dao.impl.UserDaoImpl;
+import wx.sunl.util.CreateUUID;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -39,7 +40,9 @@ public class UserLoginServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String userAddr = country+province+city;
 		if(null != phone && !phone.equals("")){
+			String userId = CreateUUID.getUUID();
 			User user = new User();
+			user.setUserId(userId);
 			user.setUserSex(sex);
 			user.setUserPhoneNumber1(phone);
 			user.setUserAddr(userAddr);
