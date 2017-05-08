@@ -10,6 +10,10 @@ public interface OrdersDao {
 	
 	public List<Orders> queryAllOrders();
 	
+	public List<Orders> queryActiveOrders();
+	
+	public List<Orders> queryPersonalOrders(String userId);
+	
 	public boolean saveOrUpdate(Orders orders, String order);
 	
 	public boolean deleteById(String orderId);

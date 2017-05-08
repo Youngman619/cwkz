@@ -49,7 +49,7 @@
 		    <div class="weui-dialog" style="margin-top: 20%;">
 		        <div class="weui-dialog__hd"><strong class="weui-dialog__title">预订信息</strong></div>
 		        <div class="weui-dialog__bd">在预定前请确认您的个人信息已完善</div>
-		        <form name="bookingInfo" id="bookingInfo" method="post" action="" class="weui-cells weui-cells_form">
+		        <form name="bookingInfo" id="bookingInfo" method="post" action="/voastudy/OrderServlet?method=save" class="weui-cells weui-cells_form">
 		        	<div class="weui-cell">
 				        <div class="weui-cell__hd">
 				        	<label for="date" class="weui-label">房型选择</label>

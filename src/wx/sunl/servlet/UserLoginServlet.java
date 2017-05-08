@@ -40,21 +40,27 @@ public class UserLoginServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String userAddr = country+province+city;
 		if(null != phone && !phone.equals("")){
-			String userId = CreateUUID.getUUID();
-			User user = new User();
-			user.setUserId(userId);
-			user.setUserSex(sex);
-			user.setUserPhoneNumber1(phone);
-			user.setUserAddr(userAddr);
 			UserDao userDao = new UserDaoImpl();
-			boolean flag = userDao.saveOrUpdate(user, "save");
-			if(flag){
+			User user = userDao.findByPhone1(phone);
+			if(null != user){
 				session.setAttribute("user", user);
 				request.getRequestDispatcher("booking.jsp").forward(request, response);
 			}else{
-				String msg = "系统错误，请稍后重试！";
-				request.setAttribute("msg", msg);
-				request.getRequestDispatcher("error.jsp").forward(request, response);
+				String userId = CreateUUID.getUUID();
+				user = new User();
+				user.setUserId(userId);
+				user.setUserSex(sex);
+				user.setUserPhoneNumber1(phone);
+				user.setUserAddr(userAddr);
+				boolean flag = userDao.saveOrUpdate(user, "save");
+				if(flag){
+					session.setAttribute("user", user);
+					request.getRequestDispatcher("booking.jsp").forward(request, response);
+				}else{
+					String msg = "系统错误，请稍后重试！";
+					request.setAttribute("msg", msg);
+					request.getRequestDispatcher("error.jsp").forward(request, response);
+				}
 			}
 		}else{
 			String msg = "您必须输入有效联系方式才能进行预订操作！";

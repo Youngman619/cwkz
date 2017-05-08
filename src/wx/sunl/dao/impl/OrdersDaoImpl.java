@@ -37,8 +37,8 @@ public class OrdersDaoImpl implements OrdersDao {
 				orders.setEmpId(rst.getString("EMP_ID"));
 				orders.setRemark(rst.getString("REMARK"));
 				orders.setUserId(rst.getString("USER_ID"));
-				orders.setPlanInTime(rst.getTimestamp("PLAN_IN_TIME"));
-				orders.setPlanInDays(rst.getString("PLAN_IN_DAYS"));
+				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
+				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,8 +69,8 @@ public class OrdersDaoImpl implements OrdersDao {
 				orders.setRemark(rst.getString("REMARK"));
 				orders.setUserName(rst.getString("USER_NAME"));
 				orders.setUserId(rst.getString("USER_ID"));
-				orders.setPlanInTime(rst.getTimestamp("PLAN_IN_TIME"));
-				orders.setPlanInDays(rst.getString("PLAN_IN_DAYS"));
+				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
+				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
 				orderList.add(orders);
 			}
 		} catch (SQLException e) {
@@ -100,8 +100,8 @@ public class OrdersDaoImpl implements OrdersDao {
 			params[9] = orders.getRemark();
 			params[10] = orders.getUserId();
 			params[11] = orders.getUserName();
-			params[12] = String.valueOf(orders.getPlanInTime());
-			params[13] = orders.getPlanInDays();
+			params[12] = String.valueOf(orders.getCheckInTime());
+			params[13] = orders.getCheckInDays();
 			flag = dbh.excuteSql(sql, params);
 		}else{
 			sql = "UPDATE tb_order SET ORDER_NO=?,CREATE_TIME=?,ROOM_NO=?,ROOM_ID=?,ORDER_STATUS=?,HANDLE_TIME=?,EMP_NO=?,EMP_ID=?,REMARK=?,USER_NAME=?,USER_ID=?,PLAN_IN_TIME=?,PLAN_IN_DAYS=? WHERE ORDER_ID=?";
@@ -117,8 +117,8 @@ public class OrdersDaoImpl implements OrdersDao {
 			params[8] = orders.getRemark();
 			params[9] = orders.getUserId();
 			params[10] = orders.getUserName();
-			params[11] = String.valueOf(orders.getPlanInTime());
-			params[12] = orders.getPlanInDays();
+			params[11] = String.valueOf(orders.getCheckInTime());
+			params[12] = orders.getCheckInDays();
 			params[13] = orders.getOrderId();
 			flag = dbh.excuteSql(sql, params);
 		}
@@ -135,6 +135,73 @@ public class OrdersDaoImpl implements OrdersDao {
 	public boolean deleteAll() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Orders> queryActiveOrders() {
+		Orders orders = null;
+		ResultSet rst = null;
+		List<Orders> orderList = new ArrayList<Orders>();
+		String sql = "SELECT * FROM tb_order WHERE ORDER_STATUS = '0'";
+		dbh = new DBHelper();
+		rst = dbh.excuteQuery(sql, null);
+		try {
+			while(rst.next()){
+				orders = new Orders();
+				orders.setOrderId(rst.getString("ORDER_ID"));
+				orders.setOrderNo(rst.getString("ORDER_NO"));
+				orders.setCreateTime(rst.getTimestamp("CREATE_TIME"));
+				orders.setRoomNo(rst.getString("ROOM_NO"));
+				orders.setRoomId(rst.getString("ROOM_ID"));
+				orders.setOrderStatus(rst.getString("ORDER_STATUS"));
+				orders.setHandleTime(rst.getTimestamp("HANDLE_TIME"));
+				orders.setEmpNo(rst.getString("EMP_NO"));
+				orders.setEmpId(rst.getString("EMP_ID"));
+				orders.setRemark(rst.getString("REMARK"));
+				orders.setUserName(rst.getString("USER_NAME"));
+				orders.setUserId(rst.getString("USER_ID"));
+				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
+				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
+				orderList.add(orders);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderList;
+	}
+
+	@Override
+	public List<Orders> queryPersonalOrders(String userId) {
+		Orders orders = null;
+		ResultSet rst = null;
+		List<Orders> orderList = new ArrayList<Orders>();
+		String[] params = new String[1];
+		String sql = "SELECT * FROM tb_order WHERE USER_ID = ?";
+		params[0] = userId;
+		dbh = new DBHelper();
+		rst = dbh.excuteQuery(sql, params);
+		try {
+			while(rst.next()){
+				orders = new Orders();
+				orders.setOrderId(rst.getString("ORDER_ID"));
+				orders.setOrderNo(rst.getString("ORDER_NO"));
+				orders.setCreateTime(rst.getTimestamp("CREATE_TIME"));
+				orders.setRoomNo(rst.getString("ROOM_NO"));
+				orders.setRoomId(rst.getString("ROOM_ID"));
+				orders.setOrderStatus(rst.getString("ORDER_STATUS"));
+				orders.setHandleTime(rst.getTimestamp("HANDLE_TIME"));
+				orders.setEmpNo(rst.getString("EMP_NO"));
+				orders.setEmpId(rst.getString("EMP_ID"));
+				orders.setRemark(rst.getString("REMARK"));
+				orders.setUserId(rst.getString("USER_ID"));
+				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
+				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
+				orderList.add(orders);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderList;
 	}
 
 }

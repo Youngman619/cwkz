@@ -10,6 +10,8 @@ public interface UserDao {
 	
 	public User findById(String userId);
 	
+	public User findByPhone1(String phoneNumber1);
+	
 	public UserAccount Login(String account, String passwd);
 	
 	public List<User> queryAllUesr();

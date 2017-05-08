@@ -140,4 +140,31 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
+	@Override
+	public User findByPhone1(String phoneNumber1) {
+		User user = null;
+		ResultSet rst = null;
+		String[] params = new String[1];
+		String sql = "SELECT * FROM tb_user WHERE USER_PHONE_ONE = ?";
+		params[0] = phoneNumber1;
+		dbh = new DBHelper();
+		rst = dbh.excuteQuery(sql, params);
+		try {
+			while(rst.next()){
+				user = new User();
+				user.setUserId(rst.getString("USER_ID"));
+				user.setUserName(rst.getString("USER_NAME"));
+				user.setUserSex(rst.getString("USER_SEX"));
+				user.setUserIDCard(rst.getString("USER_ID_CARD"));
+				user.setUserPhoneNumber1(rst.getString("USER_PHONE_ONE"));
+				user.setUserPhoneNumber2(rst.getString("USER_PHONE_TWO"));
+				user.setUserAddr(rst.getString("USER_ADDR"));
+				user.setRemark(rst.getString("REMARK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
 }
