@@ -16,7 +16,9 @@
 	 <header class='demos-header'>
       <h1 class="demos-title">个人信息</h1>
      </header>
-     <form name="UserInfoForm" method="post" action="/voastudy/UserServlet" id="UserInfoForm" class="weui-cells weui-cells_form">
+     <form name="UserInfoForm" method="post" action="/voastudy/UserServlet?method=updateForUsers" id="UserInfoForm" class="weui-cells weui-cells_form">
+    	<input class="weui-input" id="userId" name="userId" type="hidden" value="${user.userId}">
+    	<input class="weui-input" id="userAddr" name="userAddr" type="hidden" value="${user.userAddr}">
     	<div class="weui-cell">
 	        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
 	        <div class="weui-cell__bd">
@@ -30,21 +32,21 @@
 	        <div class="weui-cell__bd">
 	          <select class="weui-select" id="userSex" name="userSex">
 	            <option value="0">女性</option>
-	            <option value="1">男性</option>
+	            <option value="1" selected="selected">男性</option>
 	          </select>
 	        </div>
 	    </div>
 	    <div class="weui-cell">
 	        <div class="weui-cell__hd"><label class="weui-label">身份证号码</label></div>
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" id="userIDCard" name="userIDCard" type="number" pattern="[0-9]*" placeholder="您的身份证号码">
+	          <input class="weui-input" id="userIDCard" name="userIDCard" type="number" pattern="[0-9]*" placeholder="您的身份证号码" value="${user.userIDCard}">
 	        </div>
 	    </div>
 	    <div class="weui-cells__title">手机号码</div>
 	    <div class="weui-cells">
 	      	<div class="weui-cell weui-cell_select weui-cell_select-before">
 		        <div class="weui-cell__hd">
-		          	<select class="weui-select" id="userPhoneNumber1" name="userPhoneNumber1">
+		          	<select class="weui-select">
 			            <option value="1">+86</option>
 			            <option value="2">+80</option>
 			            <option value="3">+84</option>
@@ -52,7 +54,7 @@
 		          	</select>
 		        </div>
 		        <div class="weui-cell__bd">
-		          <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入号码">
+		          <input class="weui-input" id="userPhoneNumber1" name="userPhoneNumber1" type="number" pattern="[0-9]*" placeholder="请输入号码" value="${user.userPhoneNumber1}">
 		        </div>
 	      	</div>
 	    </div>
@@ -61,7 +63,7 @@
         </div>
     </form>
 </body>
-<script type="text/javascript">	
+<script type="text/javascript">
 	$('#submitButton').click(function(){
 		$('#UserInfoForm').submit();
 	});

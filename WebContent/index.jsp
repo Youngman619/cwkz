@@ -1,6 +1,6 @@
 <%@page import="wx.sunl.bean.Employee"%>
 <%@page import="java.util.List"%>
-<%@page import="wx.sunl.bean.Room"%>
+<%@page import="wx.sunl.bean.*"%>
 <%@page import="wx.sunl.bean.EmployeeAccount"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,6 +19,8 @@
 	EmployeeAccount empAccount = (EmployeeAccount)session.getAttribute("empAccount");
 	String activeOderNums = (String)request.getAttribute("activeOderNums");
 	List<Room> roomList = (List<Room>)request.getAttribute("roomList");
+	List<User> userList = (List<User>)request.getAttribute("userList");
+	List<Orders> ordersList = (List<Orders>)request.getAttribute("ordersList");
 %>
 	<p class="weui-msg__desc">工号：${empAccount.account}</p>
 	<p class="weui-msg__desc">欢迎您登录从吾客栈移动终端</p>
@@ -32,28 +34,31 @@
 	    <div class="page__bd">
 	        <div class="weui-cells">
 	            <div class="weui-cell weui-cell_access">
-	                <div class="weui-cell__bd">订单列表</div>
+	                <div class="weui-cell__bd">
+	                	<span style="vertical-align: middle">订单管理</span>
+	                	<span class="weui-badge" style="margin-left: 5px"><%=ordersList.size() %></span>
+	                </div>
 	                <div class="weui-cell__ft" style="font-size: 0">
 	                    <span style="vertical-align:middle; font-size: 17px;" id="ordersArray">详细信息</span>
 	                </div>
 	            </div>
 	            <div class="weui-cell weui-cell_access">
 	                <div class="weui-cell__bd">
-	                    <span style="vertical-align: middle">房间列表</span>
-	                    <span class="weui-badge" style="margin-left: 5px;color: green;"><%=roomList.size() %></span>
+	                    <span style="vertical-align: middle">房间管理</span>
+	                    <span class="weui-badge" style="margin-left: 5px"><%=roomList.size() %></span>
 	                </div>
 	                <div class="weui-cell__ft" id="roomArray"></div>
 	            </div>
 	            <div class="weui-cell weui-cell_access">
 	                <div class="weui-cell__bd">
-	                    <span style="vertical-align: middle">公告列表</span>
-	                    <span class="weui-badge" style="margin-left: 5px;">8</span>
+	                    <span style="vertical-align: middle">客户意见反馈</span>
 	                </div>
-	                <div class="weui-cell__ft" id="infoArray">详细信息</div>
+	                <div class="weui-cell__ft" id="adviceArray">详细信息</div>
 	            </div>
 	            <div class="weui-cell weui-cell_access">
 	                <div class="weui-cell__bd">
-	                    <span style="vertical-align: middle">客户列表</span>
+	                    <span style="vertical-align: middle">客户管理</span>
+	                    <span class="weui-badge" style="margin-left: 5px"><%=userList.size() %></span>
 	                </div>
 	                <div class="weui-cell__ft" id="userArray"></div>
 	            </div>
@@ -65,7 +70,7 @@
 		<c:forEach items="${roomList}" var="room" varStatus="status">
 			<a class="weui-grid" id="room${status.index}" onclick="openDialog('${room.roomType}','${room.isLock}')">
 		       <div class="weui-grid__icon">
-		           <img src="weui-1.0.0/images/icon_tabbar.png" alt="">
+		           <img src="weui-1.1.0/images/icon_tabbar.png" alt="">
 		       </div>
 		       <p class="weui-grid__label">
 		           ${room.roomNo}
@@ -100,8 +105,20 @@
 		alert("房型:   "+roomType+"\n当前状态:   "+isLock);
 	}
 	
+	$('#ordersArray').click(function(){
+		window.location.href = "<%=request.getContextPath()%>/OrderServlet?method=queryAll";
+	});
+	
+	$('#adviceArray').click(function(){
+		window.location.href = "<%=request.getContextPath()%>/AdviceServlet?method=queryAll";
+	});
+	
 	$('#roomArray').click(function(){
 		window.location.href = "<%=request.getContextPath()%>/RoomServlet?method=queryAll";
+	});
+	
+	$('#userArray').click(function(){
+		window.location.href = "<%=request.getContextPath()%>/UserServlet?method=queryAll";
 	});
 </script>
 </html>

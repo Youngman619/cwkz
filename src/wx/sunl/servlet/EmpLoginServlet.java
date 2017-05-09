@@ -13,10 +13,14 @@ import com.mysql.jdbc.StringUtils;
 
 import wx.sunl.bean.Employee;
 import wx.sunl.bean.EmployeeAccount;
+import wx.sunl.bean.Orders;
 import wx.sunl.bean.Room;
+import wx.sunl.bean.User;
 import wx.sunl.dao.*;
 import wx.sunl.dao.impl.EmployeeDaoImpl;
+import wx.sunl.dao.impl.OrdersDaoImpl;
 import wx.sunl.dao.impl.RoomDaoImpl;
+import wx.sunl.dao.impl.UserDaoImpl;
 
 /**
  * Servlet implementation class EmpLoginServlet
@@ -54,9 +58,16 @@ public class EmpLoginServlet extends HttpServlet {
 				RoomDao roomDao = new RoomDaoImpl();
 				session.setAttribute("empAccount", empAccount);
 				List<Room> roomList = roomDao.queryAllRoom();
+				//查询用户数据
+				UserDao userDao = new UserDaoImpl();
+				List<User> userList = userDao.queryAllUesr();
 				//查询订单数据
+				OrdersDao ordersDao = new OrdersDaoImpl();
+				List<Orders> ordersList = ordersDao.queryAllOrders();
 				
 				request.setAttribute("roomList", roomList);
+				request.setAttribute("userList", userList);
+				request.setAttribute("ordersList", ordersList);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}else{
 				String msg = "用户不存在，请确认您的输入的信息是否正确！";

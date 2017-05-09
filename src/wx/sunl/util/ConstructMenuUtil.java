@@ -24,11 +24,11 @@ public class ConstructMenuUtil {
 		Button button2 = new Button();
 		button2.setType("view");
 		button2.setName("æ∆µÍ‘§∂©");
-		button2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx90716ffab2e94997&redirect_uri=http://p9zk5a.natappfree.cc/voastudy/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
+		button2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx90716ffab2e94997&redirect_uri=http://7x7t4u.natappfree.cc/voastudy/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
 		Button button3 = new Button();
 		button3.setType("view");
 		button3.setName("∆Û“µ÷’∂À");
-		button3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx90716ffab2e94997&redirect_uri=http://p9zk5a.natappfree.cc/voastudy/OAuthServlet&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
+		button3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx90716ffab2e94997&redirect_uri=http://7x7t4u.natappfree.cc/voastudy/OAuthTwoServlet&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
 		
 		button.add(button1);
 		button.add(button2);

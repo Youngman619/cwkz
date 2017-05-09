@@ -11,15 +11,15 @@ import wx.sunl.model.SNSUserInfo;
 import wx.sunl.util.AdvancedUtil;
 
 /**
- * Servlet implementation class OAuthServlet
+ * Servlet implementation class OAuthTwoServlet
  */
-public class OAuthServlet extends HttpServlet {
+public class OAuthTwoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OAuthServlet() {
+    public OAuthTwoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,8 +53,7 @@ public class OAuthServlet extends HttpServlet {
             request.setAttribute("snsUserInfo", snsUserInfo);
             request.setAttribute("state", state);
         }
-    	request.getRequestDispatcher("userLogin.jsp").forward(request, response);
-        
+    	request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**

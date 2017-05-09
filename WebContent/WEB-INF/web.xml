@@ -102,6 +102,27 @@
 		<servlet-name>InfoServlet</servlet-name>
 		<servlet-class>wx.sunl.servlet.InfoServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>OAuthTwoServlet</display-name>
+		<servlet-name>OAuthTwoServlet</servlet-name>
+		<servlet-class>wx.sunl.servlet.OAuthTwoServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>UserServlet</display-name>
+		<servlet-name>UserServlet</servlet-name>
+		<servlet-class>wx.sunl.servlet.UserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>AdviceServlet</display-name>
+		<servlet-name>AdviceServlet</servlet-name>
+		<servlet-class>wx.sunl.servlet.AdviceServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>CoreServlet</servlet-name>
@@ -135,5 +156,17 @@
 	<servlet-mapping>
 		<servlet-name>InfoServlet</servlet-name>
 		<url-pattern>/InfoServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OAuthTwoServlet</servlet-name>
+		<url-pattern>/OAuthTwoServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/UserServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdviceServlet</servlet-name>
+		<url-pattern>/AdviceServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

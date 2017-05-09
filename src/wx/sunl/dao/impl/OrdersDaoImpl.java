@@ -8,7 +8,6 @@ import java.util.List;
 import wx.sunl.bean.Orders;
 import wx.sunl.dao.DBHelper;
 import wx.sunl.dao.OrdersDao;
-import wx.sunl.util.CreateUUID;
 
 public class OrdersDaoImpl implements OrdersDao {
 	
@@ -39,6 +38,7 @@ public class OrdersDaoImpl implements OrdersDao {
 				orders.setUserId(rst.getString("USER_ID"));
 				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
 				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
+				orders.setRoomType(rst.getString("ROOM_TYPE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,6 +71,7 @@ public class OrdersDaoImpl implements OrdersDao {
 				orders.setUserId(rst.getString("USER_ID"));
 				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
 				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
+				orders.setRoomType(rst.getString("ROOM_TYPE"));
 				orderList.add(orders);
 			}
 		} catch (SQLException e) {
@@ -86,40 +87,42 @@ public class OrdersDaoImpl implements OrdersDao {
 		String[] params = null;
 		dbh = new DBHelper();
 		if(order.equals("save")){
-			sql = "INSERT INTO tb_order VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			params = new String[14];
-			params[0] = CreateUUID.getUUID();
+			sql = "INSERT INTO tb_order VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			params = new String[15];
+			params[0] = orders.getOrderId();
 			params[1] = orders.getOrderNo();
 			params[2] = String.valueOf(orders.getCreateTime());
 			params[3] = orders.getRoomNo();
 			params[4] = orders.getRoomId();
 			params[5] = orders.getOrderStatus();
-			params[6] = String.valueOf(orders.getHandleTime());
+			params[6] = !String.valueOf(orders.getHandleTime()).equals("null") ? String.valueOf(orders.getHandleTime()) : "1970-01-02 00:00:00";
 			params[7] = orders.getEmpNo();
 			params[8] = orders.getEmpId();
 			params[9] = orders.getRemark();
-			params[10] = orders.getUserId();
-			params[11] = orders.getUserName();
+			params[10] = orders.getUserName();
+			params[11] = orders.getUserId();
 			params[12] = String.valueOf(orders.getCheckInTime());
 			params[13] = orders.getCheckInDays();
+			params[14] = orders.getRoomType();
 			flag = dbh.excuteSql(sql, params);
 		}else{
-			sql = "UPDATE tb_order SET ORDER_NO=?,CREATE_TIME=?,ROOM_NO=?,ROOM_ID=?,ORDER_STATUS=?,HANDLE_TIME=?,EMP_NO=?,EMP_ID=?,REMARK=?,USER_NAME=?,USER_ID=?,PLAN_IN_TIME=?,PLAN_IN_DAYS=? WHERE ORDER_ID=?";
-			params = new String[14];
+			sql = "UPDATE tb_order SET ORDER_NO=?,CREATE_TIME=?,ROOM_NO=?,ROOM_ID=?,ORDER_STATUS=?,HANDLE_TIME=?,EMP_NO=?,EMP_ID=?,REMARK=?,USER_NAME=?,USER_ID=?,PLAN_IN_TIME=?,PLAN_IN_DAYS=?,ROOM_TYPE=? WHERE ORDER_ID=?";
+			params = new String[15];
 			params[0] = orders.getOrderNo();
-			params[1] = String.valueOf(orders.getCreateTime());
+			params[1] = !String.valueOf(orders.getCreateTime()).equals("null") ? String.valueOf(orders.getCreateTime()) : "1970-01-02 00:00:00";
 			params[2] = orders.getRoomNo();
 			params[3] = orders.getRoomId();
 			params[4] = orders.getOrderStatus();
-			params[5] = String.valueOf(orders.getHandleTime());
+			params[5] = !String.valueOf(orders.getHandleTime()).equals("null") ? String.valueOf(orders.getHandleTime()) : "1970-01-02 00:00:00";
 			params[6] = orders.getEmpNo();
 			params[7] = orders.getEmpId();
 			params[8] = orders.getRemark();
 			params[9] = orders.getUserId();
 			params[10] = orders.getUserName();
-			params[11] = String.valueOf(orders.getCheckInTime());
+			params[11] = !String.valueOf(orders.getCheckInTime()).equals("null") ? String.valueOf(orders.getCheckInTime()) : "1970-01-02 00:00:00";
 			params[12] = orders.getCheckInDays();
-			params[13] = orders.getOrderId();
+			params[13] = orders.getRoomType();
+			params[14] = orders.getOrderId();
 			flag = dbh.excuteSql(sql, params);
 		}
 		return flag;
@@ -193,9 +196,11 @@ public class OrdersDaoImpl implements OrdersDao {
 				orders.setEmpNo(rst.getString("EMP_NO"));
 				orders.setEmpId(rst.getString("EMP_ID"));
 				orders.setRemark(rst.getString("REMARK"));
+				orders.setUserName(rst.getString("USER_NAME"));
 				orders.setUserId(rst.getString("USER_ID"));
 				orders.setCheckInTime(rst.getTimestamp("PLAN_IN_TIME"));
 				orders.setCheckInDays(rst.getString("PLAN_IN_DAYS"));
+				orders.setRoomType(rst.getString("ROOM_TYPE"));
 				orderList.add(orders);
 			}
 		} catch (SQLException e) {

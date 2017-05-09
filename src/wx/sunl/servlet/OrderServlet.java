@@ -8,13 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.StringUtils;
 
-import wx.sunl.bean.Employee;
 import wx.sunl.bean.Orders;
-import wx.sunl.bean.User;
 import wx.sunl.dao.OrdersDao;
 import wx.sunl.dao.impl.OrdersDaoImpl;
 import wx.sunl.util.CreateUUID;
@@ -44,22 +41,22 @@ public class OrderServlet extends HttpServlet {
 		boolean flag = false;
 		String method = request.getParameter("method");
 		if(method.equals("save")){
-			HttpSession session =  request.getSession();
 			orders = new Orders();
 			Timestamp checkInTime = null;
 			Timestamp checkOutTime = null;
+			String userId = request.getParameter("userId");
+			String userName = request.getParameter("userName");
 			String orderId = CreateUUID.getUUID();
 			String orderNo = CreateUUID.getOrderNo();
 			String roomType = request.getParameter("roomType");
 			if(!StringUtils.isNullOrEmpty(request.getParameter("checkInTime"))){
-				checkInTime = Timestamp.valueOf(request.getParameter("checkInTime"));
+				checkInTime = Timestamp.valueOf(request.getParameter("checkInTime")+" 00:00:00");
 			}
 			if(!StringUtils.isNullOrEmpty(request.getParameter("checkOutTime"))){
-				checkOutTime = Timestamp.valueOf(request.getParameter("checkOutTime"));
+				checkOutTime = Timestamp.valueOf(request.getParameter("checkOutTime")+" 00:00:00");
 			}
 			String remark = request.getParameter("remark");
 			Timestamp createTime = CreateUUID.getTimestamp();
-			User user = (User)session.getAttribute("user");
 			orders.setOrderId(orderId);
 			orders.setRoomType(roomType);
 			orders.setCheckInTime(checkInTime);
@@ -67,8 +64,8 @@ public class OrderServlet extends HttpServlet {
 			orders.setRemark(remark);
 			orders.setOrderNo(orderNo);
 			orders.setCreateTime(createTime);
-			orders.setUserId(user.getUserId());
-			orders.setUserName(user.getUserName());
+			orders.setUserId(userId);
+			orders.setUserName(userName);
 			orders.setOrderStatus("0");//OrderStatus--0 待处理；OrderStatus--1 已处理 
 			flag = ordersDao.saveOrUpdate(orders, method);
 			if(flag){
@@ -82,15 +79,13 @@ public class OrderServlet extends HttpServlet {
 			}
 		}
 		if(method.equals("update")){
-			HttpSession session =  request.getSession();
 			orders = new Orders();
-			Employee employee = (Employee) session.getAttribute("employee");
 			String orderId = request.getParameter("orderId");
-			String orderStatus = "1";
+			String orderStatus = request.getParameter("orderStatus");
 			String roomType = request.getParameter("roomType");
 			String roomId = request.getParameter("roomId");
-			String empId = employee.getEmpId();
-			String empNo = employee.getEmpNo();
+			String empId = request.getParameter("empId");
+			String empNo = request.getParameter("empNo");
 			orders.setOrderId(orderId);
 			orders.setOrderStatus(orderStatus);
 			orders.setRoomType(roomType);
@@ -114,17 +109,15 @@ public class OrderServlet extends HttpServlet {
 			request.setAttribute("orders", orders);
 			request.getRequestDispatcher("orderInfo.jsp").forward(request, response);
 		}
-		if(method.equals("queryActiveOrders")){
-			List<Orders> orderList = ordersDao.queryActiveOrders();
+		if(method.equals("queryAll")){
+			List<Orders> orderList = ordersDao.queryAllOrders();
 			if(null != orderList && !orderList.isEmpty()){
 				request.setAttribute("orderList", orderList);
-				request.getRequestDispatcher("orderList.jsp").forward(request, response);
+				request.getRequestDispatcher("orderArrayforEmp.jsp").forward(request, response);
 			}
 		}
 		if(method.equals("queryPersonalOrders")){
-			HttpSession session =  request.getSession();
-			User user = (User)session.getAttribute("user");
-			String userId = user.getUserId();
+			String userId = request.getParameter("userId");
 			List<Orders> orderList = ordersDao.queryPersonalOrders(userId);
 			if(null != orderList && !orderList.isEmpty()){
 				request.setAttribute("orderList", orderList);

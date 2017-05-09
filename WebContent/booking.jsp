@@ -50,6 +50,8 @@
 		        <div class="weui-dialog__hd"><strong class="weui-dialog__title">预订信息</strong></div>
 		        <div class="weui-dialog__bd">在预定前请确认您的个人信息已完善</div>
 		        <form name="bookingInfo" id="bookingInfo" method="post" action="/voastudy/OrderServlet?method=save" class="weui-cells weui-cells_form">
+		        	<input class="weui-input" type="hidden" value="${user.userId}" name="userId" id="userId"/>
+		        	<input class="weui-input" type="hidden" value="${user.userName}" name="userName" id="userName"/>
 		        	<div class="weui-cell">
 				        <div class="weui-cell__hd">
 				        	<label for="date" class="weui-label">房型选择</label>
@@ -68,7 +70,7 @@
 		                	<label for="" class="weui-label">入住日期</label>
 		                </div>
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="datetime-local" value="" name="checkInTime" id="checkInTime"/>
+		                    <input class="weui-input" type="date" value="" name="checkInTime" id="checkInTime"/>
 		                </div>
 		            </div>
 		            <div class="weui-cell">
@@ -76,7 +78,7 @@
 		                	<label for="" class="weui-label">退住日期</label>
 		                </div>
 		                <div class="weui-cell__bd">
-		                    <input class="weui-input" type="datetime-local" value="" name="checkOutTime" id="checkOutTime"/>
+		                    <input class="weui-input" type="date" value="" name="checkOutTime" id="checkOutTime"/>
 		                </div>
 		            </div>
 		            <div class="weui-cell">
@@ -102,11 +104,11 @@
 			            <img src="weui-1.1.0/images/icon_nav_cell.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">个人资料</p>
 			        </a>
-			        <a href="<%=request.getContextPath()%>/OrderServlet?method=queryAll&userId=${user.userId}" class="weui-tabbar__item">
+			        <a href="<%=request.getContextPath()%>/OrderServlet?method=queryPersonalOrders&userId=${user.userId}" class="weui-tabbar__item">
 			            <img src="weui-1.1.0/images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">我的订单</p>
 			        </a>
-			        <a href="javascript:;" class="weui-tabbar__item">
+			        <a href="advice.jsp" class="weui-tabbar__item">
 			            <img src="weui-1.1.0/images/icon_nav_panel.png" alt="" class="weui-tabbar__icon">
 			            <p class="weui-tabbar__label">投诉建议</p>
 			        </a>
