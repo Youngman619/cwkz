@@ -95,6 +95,13 @@
 		<servlet-name>OrderServlet</servlet-name>
 		<servlet-class>wx.sunl.servlet.OrderServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>InfoServlet</display-name>
+		<servlet-name>InfoServlet</servlet-name>
+		<servlet-class>wx.sunl.servlet.InfoServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>CoreServlet</servlet-name>
@@ -124,5 +131,9 @@
 	<servlet-mapping>
 		<servlet-name>OrderServlet</servlet-name>
 		<url-pattern>/OrderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InfoServlet</servlet-name>
+		<url-pattern>/InfoServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
